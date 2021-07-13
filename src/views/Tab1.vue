@@ -1,28 +1,91 @@
 <template>
   <ion-page>
     <ion-header>
-      <ion-toolbar>
-        <ion-title>Tab 1</ion-title>
-      </ion-toolbar>
-    </ion-header>
-    <ion-content :fullscreen="true">
-      <ion-header collapse="condense">
-        <ion-toolbar>
-          <ion-title size="large">Tab 1</ion-title>
-        </ion-toolbar>
-      </ion-header>
-    
-      <ExploreContainer name="Tab 1 page" />
-    </ion-content>
+  <ion-toolbar color="danger">
+    <ion-title>
+      Tab One
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-item>
+      <ion-select @ionChange="changeLanguage($event)" value="en">
+        <ion-select-option value="en">English</ion-select-option>
+        <ion-select-option value="es">Spanish</ion-select-option>
+        <ion-select-option value="fr">French</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-grid>
+      <ion-row>
+        <ion-col class="content-header">
+          Translated by HTTP Loader - From external JSON
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <ion-card class="ion-padding">
+      <ion-card-header>
+        Simple
+      </ion-card-header>
+      <ion-card-content>
+        <h1>{{ $t("title") }}</h1>
+        <p>{{ $t("description") }}</p>
+      </ion-card-content>
+    </ion-card>
+    <ion-card class="ion-padding">
+      <ion-card-header>
+        Simple with directive
+      </ion-card-header>
+      <ion-card-content>
+        <h1 v-t="'title'"></h1>
+        <p v-t="'description'"></p>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card class="ion-padding">
+      <ion-card-header>
+        With params, with directive
+      </ion-card-header>
+      <ion-card-content>
+        <h1 v-t="{ path: 'TITLE_2', args: { value: 'John' } }">TITLE</h1>
+        <p v-t="'description'"></p>
+      </ion-card-content>
+    </ion-card>
+    <ion-card class="ion-padding">
+      <ion-card-header>
+        With Params, nested JSON data and directive
+      </ion-card-header>
+      <ion-card-content>
+        <h1 v-t="{ path: 'data.name', args: { name_value: 'John' } }">data.name</h1>
+      </ion-card-content>
+    </ion-card>
+</ion-content>
   </ion-page>
 </template>
 
-<script lang="ts">
-import { IonPage, IonHeader, IonToolbar, IonTitle, IonContent } from '@ionic/vue';
-import ExploreContainer from '@/components/ExploreContainer.vue';
+<script lang="ts" src="./Tab1.ts"></script>
 
-export default  {
-  name: 'Tab1',
-  components: { ExploreContainer, IonHeader, IonToolbar, IonTitle, IonContent, IonPage }
+<style lang="css" scoped>
+.color {
+  color: white;
 }
-</script>
+ion-card-header{
+    border-bottom: 1px solid #ccc;
+    padding: 0 0 10px 0;
+    font-weight: bold;
+  }
+  .content-header{
+    padding: 5px 15px;
+    font-size: 20px;
+    font-weight: bold;
+  }
+  ion-card-content{
+    padding: 5px 0 0 0;
+  }
+  ion-card{
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+</style>

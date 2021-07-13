@@ -22,10 +22,19 @@ import '@ionic/vue/css/display.css';
 
 /* Theme variables */
 import './theme/variables.css';
+import  { createI18n } from 'vue-i18n'
+import { globalizationList } from './data/globalizationData';
 
+
+const i18n = createI18n({
+  locale: 'en', // set locale
+  fallbackLocale: 'en', // set fallback locale
+  messages: globalizationList, // set locale messages
+  preserveDirectiveContent: true
+})
 const app = createApp(App)
   .use(IonicVue)
-  .use(router);
+  .use(router).use(i18n);
   
 router.isReady().then(() => {
   app.mount('#app');
